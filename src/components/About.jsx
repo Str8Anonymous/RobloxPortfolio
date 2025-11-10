@@ -2,24 +2,28 @@ import { motion } from "motion/react";
 
 export default function About() {
   return (
-    <>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="p-10 mt-[35vh] space-y-6 text-center"
-      >
-        <h1 className="text-3xl font-bold">About me</h1>
-
-        <p className="max-w-2xl mx-auto text-lg opacity-90">
-          My name is Nathaniel, but you can call me Nat. I'm 22 years old and a
-          Canadian Roblox Developer with ~6 years of experience. I specialize in
-          backend systems, but I'm comfortable with frontend when needed. I
-          enjoy designing clean, modular, well commented systems especially
-          unique mechanics and complex gameplay problems that require creative
-          backend solutions.
+    <section id="about" className="py-24 px-6">
+      <div className="mb-8 max-w-3xl mx-auto text-center">
+       <h1 className="text-4xl mb-4 font-bold">About me</h1>
+        <p className="text-lg leading-relaxed opacity-90 max-w-2xl mx-auto">
+          My name is Nathaniel, but you can
+          call me Nat. I'm 22 years old and
+          a Canadian Roblox Developer with
+          ~6 years of experience. I specialize in
+          backend systems, but I'm
+          comfortable with frontend when needed. I enjoy designing
+          clean,
+          modular, well commented systems
+          especially unique mechanics and complex gameplay problems that require{" "}
+          creative backend solutions.
         </p>
-      </motion.div>
-    </>
+      </div>
+
+        <div className="flex justify-center pt-6">
+            <p className="text-gray-400 text-sm">
+              “Good systems make great games possible”
+            </p>
+        </div>
+    </section>
   );
 }
