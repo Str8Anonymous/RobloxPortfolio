@@ -55,13 +55,13 @@ export default function Card({ title, description, media, contributions, technol
             {/* Your expanded card content */}
             <h3 className="text-2xl font-bold mb-4 text-center">{title}</h3>
 
-            <div className="space-y-3 text-center">
+            {/* <div className="space-y-3 text-center">
               <p className="text-gray-700">{description}</p>
               <p className="text-gray-500">
                 This is extra info that only appears when expanded. You can put
                 more details, images, or buttons here later.
               </p>
-            </div>
+            </div> */}
             {/* Looping through media to add videos*/}
             {media && media.map((mediaItem, mediaIndex) => (
               <div key={mediaIndex} className="mb-8">
