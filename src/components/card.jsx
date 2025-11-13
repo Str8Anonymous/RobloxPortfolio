@@ -58,8 +58,7 @@ export default function Card({ title, description, media, contributions, technol
             {/* <div className="space-y-3 text-center">
               <p className="text-gray-700">{description}</p>
               <p className="text-gray-500">
-                This is extra info that only appears when expanded. You can put
-                more details, images, or buttons here later.
+                Rogueblox was originally made  by a di
               </p>
             </div> */}
             {/* Looping through media to add videos*/}
