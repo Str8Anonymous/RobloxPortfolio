@@ -29,6 +29,9 @@ export default function Projects() {
           <Card
             title={projects[currentIndex].title}
             description={projects[currentIndex].description}
+            media={projects[currentIndex].media}
+            contributions={projects[currentIndex].contributions}
+            technologies={projects[currentIndex].technologies}
             shouldExpandCard={isOpen}
             onToggle={() => setIsOpen((prev) => !prev)}
           />
