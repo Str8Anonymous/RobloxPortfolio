@@ -6,12 +6,16 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+      },
       colors: {
         'text': '#E6F1FF',
         'background': '#121212',
-        'primary': '#00A9FF',
-        'secondary': '#8892B0',
-        'accent': '#00A9FF',
+        'primary': '#91bce1',
+        'secondary': '#1f527e',
+        'accent': '#4896d8',
       },
     },
   },
