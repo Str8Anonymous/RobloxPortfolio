@@ -1,72 +1,55 @@
-import { useRef, useEffect } from "react";
+import { useState } from "react";
 
-export default function Card({ title, description, media, contributions, technologies, shouldExpandCard, onToggle }) {
-  const oldState = useRef(shouldExpandCard);
-
-  function openCard() {
-    console.log("Opening card...");
-  }
-
-  function closeCard() {
-    console.log("Closing card...");
-  }
-
-  useEffect(() => {
-    if (shouldExpandCard && !oldState.current) {
-      openCard();
-    } else if (!shouldExpandCard && oldState.current) {
-      closeCard();
-    }
-
-    oldState.current = shouldExpandCard;
-  }, [shouldExpandCard]);
+export default function Card({ title, description, media, contributions, technologies }) {
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <>
-
-
       {/* Regular collapsed card */}
       <div
-        onClick={onToggle}
-        className={`cursor-pointer card transition-all duration-300 rounded-xl border border-gray-300 p-6 bg-white shadow-lg
-        ${shouldExpandCard ? "hidden" : "relative w-[300px] min-h-[250px]"}`}
+        onClick={() => setIsExpanded(true)}
+        className={`cursor-pointer transition-all duration-300 rounded-xl shadow-lg p-6
+        
+        /* Dark Mode Styling: bg-background, border-primary, text-text */
+        bg-background border border-primary/50 hover:border-primary
+
+        ${isExpanded ? "hidden" : "relative w-[300px] min-h-[250px]"}`}
       >
         {/* Content for the collapsed card */}
-        <h3 className="text-2xl font-bold mb-4 text-center">{title}</h3>
+        <h3 className="text-2xl font-bold mb-4 text-center text-primary">{title}</h3>
 
-        <p className="text-gray-600 line-clamp-2">{description}</p>
+        {/* Use text-text for the main description */}
+        <p className="line-clamp-2 text-text">{description}</p>
 
-        <p className="mt-6 text-sm text-gray-500 italic">
+        {/* Use text-muted for the subtle instruction */}
+        <p className="mt-6 text-sm text-muted italic">
           Click to expand
         </p>
       </div>
 
 
-      {shouldExpandCard && (
+      {isExpanded && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center p-4"
-          onClick={onToggle}
+          /* Modal Overlay: Dark background opacity to maintain dark mode feel */
+          className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 flex items-center justify-center p-4"
+          onClick={() => setIsExpanded(false)}
         >
-          {/* Expanded card */}
+          {/* Expanded card (Modal Content) */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="cursor-pointer card transition-all duration-300 rounded-xl border border-gray-300 p-6 bg-white shadow-lg w-[80vw] h-[80vh] max-w-6xl max-h-[90vh] overflow-y-auto"
+            /* Dark Mode Styling: bg-background for the content, bright border/shadow */
+            className="cursor-pointer transition-all duration-300 rounded-xl p-8 bg-background border border-primary shadow-xl shadow-primary/10 w-[80vw] h-[80vh] max-w-6xl max-h-[90vh] overflow-y-auto"
           >
-            {/* Your expanded card content */}
-            <h3 className="text-2xl font-bold mb-4 text-center">{title}</h3>
+            {/* Modal Content Colors (All text is now light against the dark background) */}
+            <h3 className="text-2xl font-bold mb-4 text-center text-accent">{title}</h3>
 
-            {/* <div className="space-y-3 text-center">
-              <p className="text-gray-700">{description}</p>
-              <p className="text-gray-500">
-                Rogueblox was originally made  by a di
-              </p>
-            </div> */}
-            {/* Looping through media to add videos*/}
+            {/* Media Loop */}
             {media && media.map((mediaItem, mediaIndex) => (
               <div key={mediaIndex} className="mb-8">
-                <h4 className="text-xl font-semibold mb-2">{mediaItem.title}</h4>
-                <p className="text-gray-600 mb-4">{mediaItem.description}</p>
+                <h4 className="text-xl font-semibold mb-2 text-primary">{mediaItem.title}</h4>
+                <p className="text-text/80 mb-4">{mediaItem.description}</p>
 
+                {/* Video Embeds */}
                 <div className={mediaItem.videoIDs.length > 1
                   ? "grid grid-cols-1 gap-6"
                   : "w-full"
@@ -83,14 +66,16 @@ export default function Card({ title, description, media, contributions, technol
                 </div>
               </div>
             ))}
+            
             {/* Contributions Section */}
             {contributions && (
               <div className="mt-8">
-                <h4 className="text-xl font-semibold mb-4">Key Contributions</h4>
-                <ul className="space-y-2">
+                <h4 className="text-xl font-semibold mb-4 text-primary">Key Contributions</h4>
+                <ul className="space-y-2 text-text">
                   {contributions.map((contribution, index) => (
                     <li key={index} className="flex items-start">
-                      <span className="text-green-500 mr-2">•</span>
+                      {/* Use text-primary for bullets for consistency and pop */}
+                      <span className="text-primary mr-2">•</span> 
                       {contribution}
                     </li>
                   ))}
@@ -101,10 +86,14 @@ export default function Card({ title, description, media, contributions, technol
             {/* Technologies Section */}
             {technologies && (
               <div className="mt-6">
-                <h4 className="text-xl font-semibold mb-3">Technologies Used</h4>
+                <h4 className="text-xl font-semibold mb-3 text-primary">Technologies Used</h4>
                 <div className="flex flex-wrap gap-2">
                   {technologies.map((tech, index) => (
-                    <span key={index} className="bg-gray-100 px-3 py-1 rounded-full text-sm">
+                    <span 
+                      key={index} 
+                      /* Use primary color for tech tags (subtle background, dark text) */
+                      className="bg-primary/20 text-text px-3 py-1 rounded-full text-sm font-medium border border-primary/50"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -112,13 +101,13 @@ export default function Card({ title, description, media, contributions, technol
               </div>
             )}
 
-            <p className="mt-6 text-sm text-gray-500 italic">
+            {/* Use text-muted for the subtle instruction */}
+            <p className="mt-6 text-sm text-muted italic">
               Click outside to close
             </p>
           </div>
         </div>
       )}
-
     </>
   );
 }

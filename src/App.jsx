@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -8,12 +5,15 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 function App() {
   return (
-    <>
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-    </>
+    <div className="min-h-screen bg-background text-text relative">
+      <div className="background-glow"></div>
+      <div className="relative z-10 max-w-7xl mx-auto p-8 md:p-12">
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+      </div>
+    </div>
   );
 }
 
